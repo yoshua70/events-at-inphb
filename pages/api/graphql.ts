@@ -47,8 +47,12 @@ export default connect()
     cors({
       credentials: !__prod__,
       origin: __prod__
-        ? []
-        : ["https://studio.apollographql.com", "http://localhost:3000"],
+        ? ["https://events-at-inphb-2.vercel.app/"]
+        : [
+            "https://studio.apollographql.com",
+            "http://localhost:3000",
+            "https://events-at-inphb-2.vercel.app/",
+          ],
     })
   )
   .use(apiHandler);
