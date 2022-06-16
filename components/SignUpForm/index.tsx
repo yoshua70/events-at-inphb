@@ -1,6 +1,6 @@
 import { signUpInputSchema } from "helpers/sign-up-input-schema";
 import { useForm } from "react-hook-form";
-import { UserSignUpFormData } from "types/UserSignUpFormData";
+import { UserSignUpFormData } from "types/UserAuthFormData";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { supabase } from "lib/supabase-client";

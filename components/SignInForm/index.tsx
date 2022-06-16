@@ -6,7 +6,7 @@ import { supabase } from "lib/supabase-client";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { UserSignInFormData } from "types/UserSignUpFormData";
+import { UserSignInFormData } from "types/UserAuthFormData";
 
 const SignInForm = () => {
   const [authError, setAuthError] = useState<ApiError | null>();
@@ -26,13 +26,17 @@ const SignInForm = () => {
     if (error) setAuthError(error);
   });
 
+  console.log(authError);
+
   return (
     <div className="flex flex-col px-4 py-4 gap-4 items-center drop-shadow-md shadow-gray-800 bg-white rounded-md w-sm md:max-w-md">
       <h1>Rejoignez une grande famille.</h1>
-      {authError && (
-        <Message content={authError.message} bgColor="bg-red-700" />
-      )}
-
+      {authError &&
+        (authError.status === 400 ? (
+          <Message content={authError.message} bgColor="red" />
+        ) : (
+          <Message content="Problème de connexion au serveur." bgColor="red" />
+        ))}
       <form onSubmit={signIn} className="flex flex-col gap-4 w-full">
         <input {...register("email")} placeholder="Email instituionnel" />
         {errors.email && (

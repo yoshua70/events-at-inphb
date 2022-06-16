@@ -11,8 +11,20 @@ const Message = ({ content, bgColor }: Props) => {
     document.getElementById("message")?.remove();
   };
 
+  let theme;
+
+  switch (bgColor) {
+    case "red":
+      theme = "message-red";
+      break;
+
+    default:
+      theme = "message";
+      break;
+  }
+
   return (
-    <div className={bgColor ? `${bgColor}message` : "message"} id="message">
+    <div className={bgColor ? `message ${theme}` : "message"} id="message">
       <p className="">{content}</p>
       <span onClick={onClick}>
         <FontAwesomeIcon icon={faXmark} />
