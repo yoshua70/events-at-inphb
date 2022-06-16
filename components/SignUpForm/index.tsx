@@ -8,6 +8,7 @@ import { useMutation } from "@apollo/client";
 import { CreateUser } from "graphql/mutations/CreateUser";
 import Message from "components/Message";
 import { ApiError } from "@supabase/supabase-js";
+import Link from "next/link";
 
 const SignUpForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -79,6 +80,11 @@ const SignUpForm = () => {
           Inscription
         </button>
       </form>
+      <Link href="/sign-in">
+        <a className="underline text-blue-400">
+          Déjà un compte ? Connectez-vous ici.
+        </a>
+      </Link>
     </div>
   );
 };
