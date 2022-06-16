@@ -1,4 +1,4 @@
-import { AppProps } from "next/app";
+import Navbar from "components/Navbar";
 import Head from "next/head";
 
 type Props = {
@@ -14,7 +14,8 @@ const Layout = ({ children, title }: Props) => {
         <meta name="description" content="My awesome app." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col">{children}</div>
+      <Navbar />
+      <div className="flex flex-col md:m-auto">{children}</div>
     </div>
   );
 };

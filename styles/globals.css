@@ -13,6 +13,7 @@ button {
   @apply px-2 py-4;
   @apply rounded-md;
   @apply w-full md:max-w-fit;
+  @apply m-auto;
   @apply drop-shadow-md;
   @apply shadow-blue-700;
 }

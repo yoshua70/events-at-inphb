@@ -84,7 +84,7 @@ const ProfileForm = () => {
   }
 
   return (
-    <div className="flex flex-col px-4 py-4 gap-4 items-center drop-shadow-md shadow-gray-800 bg-white rounded-md w-sm md:max-w-md">
+    <div className="flex flex-col px-4 py-4 gap-4 items-center drop-shadow-md shadow-gray-800 bg-white rounded-md w-full md:max-w-md">
       <h1>Profile</h1>
       <form onSubmit={setProfile} className="flex flex-col gap-4 w-full">
         <input
