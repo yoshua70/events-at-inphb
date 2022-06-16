@@ -13,33 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now())
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    Int
-  Profile   Profile  @relation(fields: [author], references: [id])
-}
-
-model Profile {
-  id        Int      @id @default(autoincrement())
-  userId    Int      @unique
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now())
-  name      String?  @db.VarChar(255)
-  username  String   @unique @db.VarChar(255)
-  bio       String?
-  User      User     @relation(fields: [userId], references: [id])
-  Post      Post[]
-}
-
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now())
-  Profile   Profile?
+  id             Int      @id @default(autoincrement())
+  email          String   @unique @db.VarChar(255)
+  supabaseUserId String   @unique @db.VarChar(255)
+  createdAt      DateTime @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime @default(now())
 }

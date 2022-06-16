@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.8",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@hookform/resolvers": "^2.9.1",
     "@prisma/client": "^3.14.0",
     "@supabase/supabase-js": "^1.35.3",
     "apollo-server-micro": "^3.8.2",
@@ -22,9 +27,11 @@
     "next-connect": "^0.12.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-hook-form": "^7.32.1",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.4.0",
-    "type-graphql": "^1.1.1"
+    "type-graphql": "^1.1.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
