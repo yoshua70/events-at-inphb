@@ -45,7 +45,7 @@ const apiHandler: NextApiHandler = async (
 export default connect()
   .use(
     cors({
-      credentials: !__prod__,
+      credentials: false,
       origin: __prod__
         ? ["https://events-at-inphb-2.vercel.app/"]
         : [
