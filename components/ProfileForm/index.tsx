@@ -32,7 +32,6 @@ const ProfileForm = () => {
   const [upsertProfile, { data, loading, error }] = useMutation(UpsertProfile);
 
   const setProfile = handleSubmit(async (data) => {
-    console.log(data);
     const user = await supabase.auth.user();
     upsertProfile({
       variables: {
@@ -81,19 +80,19 @@ const ProfileForm = () => {
           placeholder="Nom"
           defaultValue={dataQuery?.user?.profile.name}
         />
-        {errors.name && <p>{errors.name?.message}</p>}
+        {errors && errors.name && <p>{errors.name?.message}</p>}
         <input
           {...register("username")}
           placeholder="Nom d'utilisateur"
           defaultValue={dataQuery?.user?.profile.username}
         />
-        {errors.username && <p>{errors.username?.message}</p>}
+        {errors && errors.username && <p>{errors.username?.message}</p>}
         <textarea
           {...register("bio")}
           placeholder="Bio"
           defaultValue={dataQuery?.user?.profile.bio}
         />
-        {errors.bio && <p>{errors.bio?.message}</p>}
+        {errors && errors.bio && <p>{errors.bio?.message}</p>}
 
         <button
           type="submit"
