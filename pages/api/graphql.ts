@@ -6,7 +6,8 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { resolvers } from "graphql/resolvers/generated/type-graphql";
 import prisma from "lib/prisma-client";
-import { __prod__ } from "helpers/constants";
+
+const __prod__ = process.env.NODE_ENV === "production";
 
 export const config = {
   api: {
@@ -45,13 +46,16 @@ const apiHandler: NextApiHandler = async (
 export default connect()
   .use(
     cors({
-      credentials: false,
+      credentials: !__prod__,
       origin: __prod__
-        ? ["https://events-at-inphb-2.vercel.app/"]
+        ? [
+            "https://events-at-inphb-2.vercel.app",
+            "https://studio.apollographql.com",
+          ]
         : [
             "https://studio.apollographql.com",
             "http://localhost:3000",
-            "https://events-at-inphb-2.vercel.app/",
+            "https://events-at-inphb-2.vercel.app",
           ],
     })
   )
