@@ -1,13 +1,12 @@
 import { ApolloServer } from "apollo-server-micro";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import connect from "next-connect";
-import cors from "cors";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { resolvers } from "graphql/resolvers/generated/type-graphql";
 import prisma from "lib/prisma-client";
-
-const __prod__ = process.env.NODE_ENV === "production";
+import { __prod__ } from "helpers/constants";
+import initMiddleware from "lib/init-middleware";
+import Cors from "cors";
 
 export const config = {
   api: {
@@ -15,13 +14,17 @@ export const config = {
   },
 };
 
-const handler = connect<NextApiRequest, NextApiResponse>();
+const cors = initMiddleware(
+  Cors({
+    methods: ["GET", "POST", "OPTIONS"],
+  })
+);
 
 const apiHandler: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  if (handler && __prod__) return handler(req, res);
+  await cors(req, res);
 
   const schema = await buildSchema({
     resolvers,
@@ -36,24 +39,9 @@ const apiHandler: NextApiHandler = async (
 
   await apolloServer.start();
 
-  const apolloHandler = apolloServer.createHandler({
+  await apolloServer.createHandler({
     path: "/api/graphql",
-  });
-
-  return apolloHandler(req, res);
+  })(req, res);
 };
 
-export default connect()
-  .use(
-    cors({
-      credentials: !__prod__,
-      origin: __prod__
-        ? ["https://events-at-inphb-2.vercel.app"]
-        : [
-            "https://studio.apollographql.com",
-            "http://localhost:3000",
-            "https://events-at-inphb-2.vercel.app",
-          ],
-    })
-  )
-  .use(apiHandler);
+export default apiHandler;
