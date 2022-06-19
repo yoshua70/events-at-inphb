@@ -7,17 +7,6 @@ import { UpsertProfile } from "graphql/mutations/UpsertProfile";
 import { supabase } from "lib/supabase-client";
 import Message from "components/Message";
 import { FetchUserProfileBySupabaseId } from "graphql/queries/FetchUserProfileBySupabaseId";
-import { GetServerSideProps } from "next";
-
-// type Data = {
-//   user: {
-//     profile: {
-//       name: string;
-//       username: string;
-//       bio: string;
-//     };
-//   };
-// };
 
 const ProfileForm = () => {
   const {
@@ -90,19 +79,19 @@ const ProfileForm = () => {
         <input
           {...register("name")}
           placeholder="Nom"
-          defaultValue={dataQuery?.user.profile.name}
+          defaultValue={dataQuery?.user?.profile.name}
         />
         {errors.name && <p>{errors.name?.message}</p>}
         <input
           {...register("username")}
           placeholder="Nom d'utilisateur"
-          defaultValue={dataQuery?.user.profile.username}
+          defaultValue={dataQuery?.user?.profile.username}
         />
         {errors.username && <p>{errors.username?.message}</p>}
         <textarea
           {...register("bio")}
           placeholder="Bio"
-          defaultValue={dataQuery?.user.profile.bio}
+          defaultValue={dataQuery?.user?.profile.bio}
         />
         {errors.bio && <p>{errors.bio?.message}</p>}
 
@@ -119,17 +108,3 @@ const ProfileForm = () => {
 };
 
 export default ProfileForm;
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const { loading, error, data } = useQuery(FetchUserProfileBySupabaseId, {
-//     variables: {
-//       where: {
-//         supabaseUserId: null,
-//       },
-//     },
-//   });
-
-//   return {
-//     props: { user: data.user },
-//   };
-// };
